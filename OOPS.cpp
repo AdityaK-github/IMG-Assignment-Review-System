@@ -49,7 +49,6 @@ public:
     void removeAssignment(const string &assignment)
     {
         pendingAssignments.erase(remove(pendingAssignments.begin(), pendingAssignments.end(), assignment), pendingAssignments.end());
-        cout << "Assignment removed from pending list!" << endl;
     }
     bool hasPendingAssignments() const
     {
@@ -267,9 +266,10 @@ int main()
         if (cin.fail())
         {
             cout << "Invalid input! Please enter a valid option." << endl;
-            cin.clear();                                         // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cin.clear();                                        
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
             continue;
+            
         }
 
         switch (choice)
@@ -350,7 +350,6 @@ int main()
                                     if (student.hasPendingAssignments())
                                     {
                                         cout << "Enter Assignment Name: ";
-                                        cin.ignore();
                                         getline(cin, assignmentName);
                                         cout << "Enter Reviewer Name: ";
                                         getline(cin, reviewerName);
@@ -414,7 +413,6 @@ int main()
                             {
                             case 1:
                                 cout << "\nEnter assignment name: ";
-                                cin.ignore();
                                 getline(cin, assignmentName);
                                 for (Student &student : system.getStudents())
                                 {
