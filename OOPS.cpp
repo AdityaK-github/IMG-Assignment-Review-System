@@ -41,6 +41,9 @@ public:
     {
         pendingAssignments.push_back(assignment);
     }
+    void addReviewedAssignment(const string &assignment) {
+        reviewedAssignments.push_back(assignment);
+    }
     void submitAssignment(const string &assignment, Reviewer &reviewer);
     bool hasAssignment(const string &assignment) const
     {
@@ -145,6 +148,7 @@ public:
     {
         cout << "Assignment reviewed and marked as 'completed!' by " << getName() << endl;
         student.removeAssignment(assignment);
+        
     }
     void addAssignment(const string &assignment, vector<Student> &students)
     {
@@ -283,7 +287,6 @@ int main()
             getline(cin, email);
             Student student(name, email);
             system.addStudent(student);
-
             break;
         }
         case 2:
@@ -422,7 +425,6 @@ int main()
                             case 2:
                                 reviewer.getPendingAssignment();
                                 cout << "Choose assignment name: ";
-                                cin.ignore();
                                 getline(cin, assignmentName);
                                 cout << "Students who haven't completed this assignment are: " << endl;
                                 for (Student &student : system.getStudents())
@@ -436,7 +438,6 @@ int main()
                                     }
                                 }
                                 cout << "Enter student name to review the assignment for: ";
-                                cin.ignore();
                                 getline(cin, studentName);
                                 for (Student &student : system.getStudents())
                                 {
@@ -496,6 +497,5 @@ int main()
         }
     Main_Menu:;
     }
-
     return 0;
 }
