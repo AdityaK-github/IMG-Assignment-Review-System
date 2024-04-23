@@ -41,7 +41,8 @@ public:
     {
         pendingAssignments.push_back(assignment);
     }
-    void addReviewedAssignment(const string &assignment) {
+    void addReviewedAssignment(const string &assignment)
+    {
         reviewedAssignments.push_back(assignment);
     }
     void submitAssignment(const string &assignment, Reviewer &reviewer);
@@ -148,7 +149,6 @@ public:
     {
         cout << "Assignment reviewed and marked as 'completed!' by " << getName() << endl;
         student.removeAssignment(assignment);
-        
     }
     void addAssignment(const string &assignment, vector<Student> &students)
     {
@@ -270,10 +270,9 @@ int main()
         if (cin.fail())
         {
             cout << "Invalid input! Please enter a valid option." << endl;
-            cin.clear();                                        
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
-            
         }
 
         switch (choice)
@@ -448,21 +447,27 @@ int main()
                                 }
                                 break;
                             case 3:
-                                cout << "Enter student name:";
-                                getline(cin, studentName);
-                                cout << "Enter assignment name:";
-                                getline(cin, assignmentName);
-                                cout << "Enter your suggestion: ";
-                                getline(cin, suggestion);
-                                for (Student &student : system.getStudents())
+                                if (reviewer.pendingAssignments.size() != 0)
                                 {
-                                    for (string assignment : student.getPendingAssignments())
+                                    cout << "Enter student name:";
+                                    getline(cin, studentName);
+                                    cout << "Enter assignment name:";
+                                    getline(cin, assignmentName);
+                                    cout << "Enter your suggestion: ";
+                                    getline(cin, suggestion);
+                                    for (Student &student : system.getStudents())
                                     {
-                                        if (assignment == assignmentName)
+                                        for (string assignment : student.getPendingAssignments())
                                         {
-                                            reviewer.suggestIteration(student, assignment, suggestion);
+                                            if (assignment == assignmentName && studentName == student.getName())
+                                            {
+                                                reviewer.suggestIteration(student, assignment, suggestion);
+                                            }
                                         }
                                     }
+                                }
+                                else {
+                                    cout << "No pending assignments!! :)\n\n";
                                 }
                                 break;
                             case 4:
